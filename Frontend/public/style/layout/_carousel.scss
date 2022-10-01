@@ -1,0 +1,32 @@
+.carousel{
+  .heroSwiper{
+    position: relative;
+    z-index: 1;
+    img{
+      width: 100%;
+    }
+    .swiper-pagination-bullet{
+      width: 0.8vw;
+      height: 0.8vw;
+    }
+    .swiper-pagination-bullet-active{
+      background-color: $darker-pink;
+    }
+    .prev-arrow, .next-arrow{
+      position: absolute;
+      top: 45%;
+      font-size: 2.3rem;
+      color: $darker-pink;
+      z-index: 1;
+      cursor: pointer;
+    }
+    .prev-arrow{
+      left: 15px;
+    }
+    .next-arrow{
+      right: 15px;
+    }
+    
+  }
+
+}

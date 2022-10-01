@@ -1,0 +1,252 @@
+.loginModal {
+  position: fixed;
+  top: 10%;
+  left: 22%;
+  border-radius: 1rem;
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+  z-index: 1;
+  display: none;
+
+  .container {
+    background: #fff;
+    width: 900px;
+    // max-width: 100%;
+    min-height: 600px;
+    border-radius: 1rem;
+    position: relative;
+  }
+
+  .closeModal {
+    @include closeModal;
+    z-index: 20;
+  }
+
+  .userLoginDiv {
+    background: #fff;
+    display: flex;
+    flex-direction: column;
+    padding: 0 2rem;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    h1 {
+      margin: 3rem 2.5rem;
+    }
+    span {
+      font-size: 0.8rem;
+      margin-bottom: 1rem;
+    }
+
+    input {
+      background: $gray;
+      border: 1px solid $gray;
+      border-radius: 0.5rem;
+      padding: 0.5rem 1.2rem;
+      width: 100%;
+      margin: 0.5rem;
+      &::placeholder {
+        font-size: 1.1rem;
+      }
+    }
+    .forgetPwBtn {
+      font-size: 0.8rem;
+      margin: 1rem 0;
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+
+  .form-container {
+    position: absolute;
+    top: 0;
+    height: 100%;
+    form {
+      background: #fff;
+      display: flex;
+      flex-direction: column;
+      padding: 0 2rem;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      h1 {
+        margin: 2rem 2.5rem;
+      }
+      span {
+        font-size: 0.8rem;
+        margin-bottom: 1rem;
+      }
+
+      input {
+        background: $gray;
+        border: 1px solid $gray;
+        border-radius: 0.5rem;
+        padding: 0.5rem 1.2rem;
+        width: 100%;
+        margin: 0.5rem;
+        &::placeholder {
+          font-size: 1.1rem;
+        }
+      }
+      .forgetPwBtn {
+        font-size: 0.8rem;
+        margin: 1rem 0;
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+    }
+  }
+
+  #signUp,
+  #signIn {
+    font-size: 1.1rem;
+  }
+
+  .social-container {
+    margin: 1rem 0;
+    .social {
+      border: 1px solid $gray;
+      border-radius: 50%;
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      margin: 0 0.6rem;
+      height: 3rem;
+      width: 3rem;
+      font-size: 1.2rem;
+      &:hover {
+        background: $darker-pink;
+        color: #fff;
+        border-color: $darker-pink;
+      }
+    }
+  }
+
+  button {
+    background-color: transparent;
+    border: 1px solid $black;
+    border-radius: 1.2rem;
+    padding: 0.5rem 3rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    transition: transform 100ms ease-in;
+    cursor: pointer;
+    &:active {
+      transform: scale(0.9);
+    }
+    &:hover {
+      background-color: $pink;
+      color: #fff;
+      border: none;
+      transition: 0.2s ease-in;
+    }
+  }
+
+  .sign-in-container {
+    left: 0;
+    width: 50%;
+    z-index: 2;
+  }
+
+  .sign-up-container {
+    left: 0;
+    width: 50%;
+    opacity: 0;
+    z-index: 1;
+  }
+
+  .overlay-container {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 50%;
+    height: 100%;
+    overflow: hidden;
+    transition: transform 0.6s ease-in-out;
+    z-index: 10;
+  }
+
+  .overlay {
+    background-image: url("/img/bg.png");
+    background-position: center;
+    background-size: cover;
+    color: #fff;
+    position: relative;
+    left: -100%;
+    height: 100%;
+    width: 200%;
+    transform: translateX(0);
+    transition: transform 0.6s ease-in-out;
+  }
+
+  .overlay-panel {
+    position: absolute;
+    top: 0;
+    padding: 0 40px;
+    height: 100%;
+    width: 50%;
+    margin-top: 0.5rem;
+    text-align: center;
+    transform: translateX(0);
+    transition: transform 0.6s ease-in-out;
+    span {
+      font-size: 0.8rem;
+      cursor: pointer;
+      color: $black;
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+
+  .overlay-right {
+    right: 0;
+    transform: translateX(0);
+  }
+
+  .overlay-left {
+    transform: translateX(-20%);
+  }
+
+  /* Animation */
+  .container.right-panel-active {
+    .sign-in-container {
+      transform: translateX(100%);
+    }
+
+    // Move Overlay to left
+    .overlay-container {
+      transform: translateX(-100%);
+    }
+
+    // Bring signup over sign in
+    .sign-up-container {
+      transform: translateX(100%);
+      opacity: 1;
+      z-index: 5;
+    }
+
+    // Move overlay back to right
+    .overlay {
+      transform: translateX(50%);
+    }
+    .overlay-left {
+      transform: translateX(0);
+    }
+    .overlay-right {
+      transform: translateX(20%);
+    }
+  }
+
+  .modal-overlay {
+    background-color: rgba(0, 0, 0, 0.2);
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    z-index: -1;
+  }
+}

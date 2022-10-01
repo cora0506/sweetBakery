@@ -1,0 +1,179 @@
+.checkout{
+  height: 100%;
+  margin: 2rem 5rem;
+  .heading{
+    @include page-heading($text-color);
+  }
+  .divider{
+    @include divider(100);
+  }
+
+  .checkoutContainer{
+    display: flex;
+    width: 100%; 
+    margin: 1rem auto;
+    // border: 1px solid $darker-gray;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    border-radius: 0.5rem;
+    overflow: hidden;
+  }
+
+  .orderCard{
+    height: 100%;
+    width: 100%;
+  }
+
+  .orderHeader{
+    display: flex;
+    font-size: 1.3rem;
+    padding:1rem 2rem;
+    // background: $background-color;
+    // background-color: $pink;
+    // > div{
+    //   color: #fff;
+    // }
+  }
+
+  .orderItems{
+    display: flex;
+    font-size: 1.3rem;
+    margin: 1rem ;
+    padding: 1rem;
+    border-bottom:1px solid $gray;
+    &:last-child{
+      border-bottom: none;
+    }
+    .detail-wrapper{
+      display: flex;      
+      justify-content: space-between;
+      align-items: center;
+      flex: 2;
+      padding-left: 2rem;
+    }
+
+    .orderThumbnail{
+      width: 13%;
+      img{
+        margin-left: 1rem;
+        max-width: 100%;
+        height: auto;
+        aspect-ratio: 1/1;
+        object-fit: cover;
+        object-position: center;
+      }
+    }
+  }
+
+  .col{
+    flex: 1;
+    text-align: center; 
+    >span{
+      color: $darker-gray;
+    }
+  }
+  
+   .totalPrice{
+      text-align: end;
+      padding: 1rem;
+      font-size: 1.3rem;
+      color: $text-color; 
+      font-weight: 700;
+      border-top: 3.5px solid $gray;
+      .totPrice{
+        margin-right: 3rem;
+      }
+    }
+    
+    .customerInfo{
+      font-size: 1.3rem;
+      margin-top: 2rem;
+      border: 1px solid $gray;
+      border-radius: 0.5rem;
+      overflow: hidden;
+      box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+      h4{
+        border-bottom: 1px solid $gray;
+        padding: 0.5rem 1rem;
+        margin-bottom: 1rem;
+        font-weight: 700;
+        letter-spacing: 3px;
+        background-color: $gray;
+      }
+
+      .row{
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        width: 100%;
+        margin-left: 1rem;
+        margin-bottom: 1rem;
+      }
+
+      .column {
+        display: flex;
+        flex-direction: column;
+        flex-basis: 100%;
+        flex: 1;
+      }
+      .guestData{
+        margin: 1rem 0;
+      }
+
+      label, span{
+        display: block;
+      }
+
+      input{
+        border: 1px solid $gray;
+        padding: 0.5rem 1rem;
+        border-radius: 0.3rem;
+        width: 15rem;
+        &:focus{
+          border-color: $black;
+        }
+      }
+      .pickupDate{
+        position: relative;
+        width: 20rem;
+        // width: 50%;
+        #datepicker{
+          cursor: pointer;
+        }
+        .fa-calendar-day{
+          position: absolute;
+          top: 20%;
+          right: 30%;
+          cursor: pointer;
+        }
+      }
+    
+      .storePay{
+        font-size: 1.1rem;
+      }
+      
+      .submitBtn, .cancelBtn{
+        margin-top: 1rem;
+        padding: 0.8rem 1.5rem;
+        border-radius: 0.2rem;
+        margin-right: 1rem;
+        cursor: pointer;
+        color: #fff;
+        font-size: 1rem;
+        a {
+          color: #fff;
+          font-size: 1rem;
+        }
+        &:hover{
+          opacity: 0.8;
+        }
+      }
+      .submitBtn{
+        background-color: $text-color;
+      }
+      .cancelBtn{
+        background-color: $darker-gray;
+      }
+    
+    }
+
+}

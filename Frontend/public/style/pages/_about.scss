@@ -1,0 +1,123 @@
+.about{
+  .heading{
+    width: 100%;
+    height: 250px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: $gray;
+    .page-heading{
+      color: #ce5d70; 
+      font-weight: 700;
+      font-size: 1.8rem;
+      letter-spacing: 1rem;
+    }
+    @include breadCrumbs;
+  }
+
+  .about-wrapper{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+    width: 70rem;
+  }
+
+  .content{
+    display: flex;
+    padding: 1.5rem 2rem;
+    justify-content: center;
+    align-items: center;
+    &.odd{
+      flex-direction: row-reverse;
+    }
+    img{
+      width: 500px;
+      height: 100%;
+      max-width: 100%; 
+    }
+    p{
+      padding: 0 1rem;
+      // font-size: 1.5vmax;
+      font-size: 1.2rem;
+      letter-spacing: 3px;
+      line-height: 2.3rem;
+      // width: 100%;
+      margin: 0 2rem;
+    }
+  }
+
+  // .info-cards{
+  //   display: flex;
+  //   justify-content: space-around;
+  //   margin: 10rem 0;
+  //   color: #fff;
+  // }
+  //   .store-info{
+  //     background-color: $pink;
+  //     box-shadow: 1rem 1rem 0 $green;
+  //     font-size: 1.3rem;
+  //     ul{
+  //       margin: 3rem;
+  //       li{
+  //         line-height: 4rem;
+  //         a{
+  //           color: #fff;
+  //           &:hover{
+  //             text-decoration: underline;
+  //           }
+  //         }
+  //       }
+  //     }
+  //     .social{
+  //       font-size: 3rem;
+  //       text-align: center;
+  //       i{
+  //         margin: 3rem 0.5rem;
+  //         cursor: pointer;
+  //       }
+  //     }
+  //   }
+  //   .store-hour{
+  //     background-color: $pink;
+  //     box-shadow: 1rem 1rem 0 $green;
+  //     font-size: 1.5rem;
+  //     ul{
+  //       margin: 2rem;
+  //       li{
+  //         display: flex;
+  //         justify-content: space-between;
+  //         line-height: 2rem;
+  //         span{
+  //           margin: 0 3rem;
+  //           line-height: 3rem;
+  //         }
+  //       }
+  //     }
+  //   }
+  //   .card-heading{
+  //     text-align: center;
+  //     margin-top: 1rem;
+  //     letter-spacing: 5px;
+  //     font-weight: normal;
+  //     font-size: 2rem;
+  //   }
+  
+
+
+  //media query 
+  //flex-wrap: wrap when screen reach certain size 
+  @media screen and (max-width: 1200px) {
+    .content{
+      flex-wrap: wrap;
+      p{
+        padding: 0;
+      }
+    }
+  }
+
+  // @media screen and (max-width: )
+  
+}

@@ -1,0 +1,147 @@
+//product cards
+.productCard{
+  --padding: 1rem;
+  margin-top: 1rem;
+  background: #fff;
+  box-shadow: 0 2px 5px 0 rgba(0,0,0,0.2);
+  border-radius: 0.5rem;
+  overflow: hidden;
+  max-width: 300px;
+}
+
+.card-image{
+  width: 100%;
+  font-size: 1.5rem;
+  margin-bottom: 0.5rem;
+  position: relative;
+  .imgLoader{
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: url('/img/loader.svg') no-repeat white center;
+    background-size: 50%;
+    width: 100%; 
+    height: 100%;
+  }
+  img{
+    width: 100%;
+    height: 250px;
+    aspect-ratio: 1/1;
+    object-fit: cover;
+    object-position: center;
+    &:hover{
+      transform: scale(1.025);
+      transition: 300ms ease-in-out;
+    }
+    // &::before{
+    //   content: "";
+    //   position: absolute;
+    //   top: 0; 
+    //   right: 0;
+    //   background-color: red;
+    //   width: 100px;
+    //   height: 100px;
+    //   z-index: 1000;
+    // }
+  }
+}
+.body-wrapper{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 1rem 0;
+  .card-body{
+    padding: 0 var(--padding);
+    .productTitle{
+      font-size: 1.4rem;
+      white-space: nowrap;
+      a{
+        color: $black;
+      }
+    }
+    .productPrice{
+      color: $text-color;
+      font-weight: 700;
+    }
+  }
+  .cartBtn{
+    margin-top: 0.5rem;
+    padding: var(--padding);
+    padding-top: 0;  
+    .fa-shopping-cart{
+      color: $text-color;
+      font-size: 2rem;
+      cursor: pointer;
+      &:hover{
+        opacity: 0.8;
+      }
+    }
+  }
+}
+
+
+/* ---------------------------------- */
+
+//class cards
+.classCard{
+  display: flex;
+  margin: 1rem;
+  padding-bottom: 2rem;
+  border-bottom: 2px solid $gray;
+}
+.classImg{
+  width: 400px;
+  height: 250px;
+  padding: 1rem;
+  img{
+    width: 100%;
+    height: 250px;
+    aspect-ratio: 1/1;
+    object-fit: cover;
+    object-position: center;
+    border-radius: 0.5rem;
+  }
+}
+.content{
+  width: 100%;
+  padding: 0 1rem;
+  .classTitle{
+    font-size: 2rem;
+    padding-top: 5px;
+    a{
+      color: $text-color;
+    }
+  }
+  
+  .classTime{
+    display: inline;
+    i{
+      margin-right: 0.5rem;
+    }
+  }
+
+  .divider{
+    width: 100%;
+    height: 1px;
+    margin-top: 1rem;
+    background: $black;
+  }
+  .remain{
+    color: $text-color;
+    font-weight: 700;
+    font-size: 1.2rem;
+    float: right;
+  }
+  .classInfo{
+    // width: 100%;
+    h3{
+      text-decoration: underline;
+      margin: 1rem 0;
+    }
+    .desc{
+      width: 100%;
+      margin-bottom: 1rem;
+    }
+    /* button style in _button.scss */
+  }
+}

@@ -1,0 +1,58 @@
+.signUpBtn{
+  background: $text-color;
+  width: 500px;
+  padding: 0.8rem 0;
+  border-radius: 8px;
+  color: #fff;
+  font-size: 1.3rem;
+  cursor: pointer;
+  &:hover:not([disabled]){
+    color: #fff;
+    border: 0;
+    transform: scale(1.02);
+    transition: all 300ms ease-in-out;
+  }
+  &:disabled:hover{
+    cursor: not-allowed;
+  }
+}
+
+.buttons{
+  display: flex;
+  // margin-top: 1rem;
+}
+
+.buyBtn, .addToCartBtn{
+  padding: 1rem 2rem;
+  width: 50%;
+  cursor: pointer;
+  margin: 1rem 1rem 0 0;
+  font-size: 1rem;
+  border-radius: 0.3rem;
+  font-size: 1.3rem;
+}
+
+.addToCartBtn{
+  border: 2px solid $darker-pink;
+  background-color: transparent;
+  color: $darker-pink;
+  cursor: pointer;
+  .fa-cart-plus{
+    margin-right: 1rem;
+    font-size: 1.3rem;
+  }
+  &:hover{
+    transform: scale(1.02);
+    transition: 300ms ease-in-out;
+  }
+}
+
+.buyBtn{
+  background-color: $pink;
+  color: #fff;
+  &:hover{
+    transform: scale(1.02);
+    transition: 300ms ease-in-out;
+  }
+}
+

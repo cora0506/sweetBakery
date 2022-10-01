@@ -1,0 +1,79 @@
+footer{
+  border-top: 1px solid $gray;
+  // margin-top: -3rem;
+  .footer-container{
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    flex-wrap: wrap;
+    padding: 1rem;
+  }
+  
+  .logo{
+    img{
+      margin: 1rem;
+      max-width: 10rem;
+    }
+  }
+   
+  .store-info{
+    display: flex;
+    flex-direction: column;
+    margin-top: 0.8rem;
+    h4{ 
+      border-bottom: 1px solid $gray;
+      letter-spacing: 3px;
+      color: $darker-gray;
+    }
+  }
+  .aboutInfo{
+    margin-top: 1rem;
+    i{
+      color: $pink;
+      margin-right: 1rem;
+    }
+    a{
+      color: $black;
+      &:hover{
+        color: $text-color;
+        text-decoration: none;
+      }
+    }
+  }
+
+  .social{
+    font-size: 2rem;
+    i{
+      margin: 0 0.5rem;
+      cursor: pointer;
+    }
+    .fa-facebook{
+      color: #4b6db4;
+    }
+    .fa-instagram{
+      color: #C13584;
+    }
+    .fa-line{
+      color: #00B900;
+    }
+  }
+
+  .copyright{
+    border-top: 1px solid rgb(231, 231, 231); 
+    text-align: center; 
+    padding: 0.5rem 0; 
+    font-size: 0.8rem;
+  }
+ 
+  @media screen and (max-width: 600px) {
+    .footer-container{
+      flex-direction: column;
+    }
+    .store-info{
+      margin: 1rem 0;
+    }
+    .social{
+      margin: 1rem 0;
+    }
+  }
+}

@@ -1,0 +1,108 @@
+.products{
+  .heading{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: url("/img/product-bg.jpg"); 
+    background-position: bottom right;
+    background-size: cover;
+    background-repeat: no-repeat;
+    width: 100%;
+    height: 280px;
+    margin-bottom: 1rem;
+    position: relative;
+    .page-heading{
+      color: #ce5d70; 
+      font-weight: 700;
+      font-size: 1.8rem;
+      letter-spacing: 1rem;
+    }
+    @include breadCrumbs;
+  }
+
+  .products-container{
+    margin: 0 5rem;
+    display: flex;
+    margin-bottom: 2rem;
+  }
+
+  .product-content{
+    width: 100%;
+  }
+
+  .product-grid{
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 2rem;
+    margin-left: 5%;
+    margin-bottom: 2rem;
+  }
+
+  .productCategories{
+    margin-top: 5%;
+    position: relative;
+    .subHeading{
+      text-align: center; 
+      background-color: #ce5d70; 
+      color: white; 
+      border-radius: 1rem;
+      font-size: 1.5rem;
+      padding: 0.5rem 0;
+    }
+    .sideMenu{
+      // background-color: $pink;
+      background-color: #f8f8f8;
+      border-radius: 0.5rem;
+      width: 11rem;
+      height: 350px;
+      padding: 1rem;
+      margin-top: 1rem;
+      line-height: 4rem;
+      a{
+        font-size: 1.5rem;
+        color: $text-color;
+        margin-left: 1rem;
+        position: relative;
+        &::after{
+          content: "";
+          position: absolute;
+          height: 3px;
+          width: 100%;
+          bottom: -5px;
+          left: 0;
+          background: $pink;
+          border-radius: 1rem;
+          transform: scaleX(0);
+          transform-origin: bottom right;
+          transition: transform 0.5s ease-in;
+        }
+        &:hover{
+          // border-bottom: 2px solid $pink;
+          &:after{
+            transform: scaleX(1);
+            transform-origin: bottom left;
+            }
+        }
+      }
+     
+    }
+  }
+
+  .sort-container{
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 1rem;
+    margin-right: 2rem;
+  }
+
+
+  @media screen and (max-width:416px) {
+    .heading{
+      @include page-heading(0); 
+      width: 95%;
+      margin-left: 5%;
+    }
+  }
+
+}

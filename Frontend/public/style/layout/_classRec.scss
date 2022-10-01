@@ -1,0 +1,32 @@
+.classRec{
+  .section-heading{
+    @include section-heading;
+  }
+
+  .classCard{
+    border: 2px solid $gray;
+    border-radius: 10px;
+    margin: 0 6%;
+  }
+  
+  @media screen and (max-width: 920px) {
+    .classCard{
+      flex-wrap: wrap;
+      width: 80%;
+      margin-left: 15%;
+    }
+    .classInfo{
+      h3{
+        font-size: 1rem;
+      }
+      .desc{
+        font-size: 0.9rem;
+      }
+    }
+    .content{
+      width: 100%;
+    }
+
+  }
+  
+}

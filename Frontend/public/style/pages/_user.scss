@@ -1,0 +1,125 @@
+.user {
+    display: flex;
+    // background-color: $background-color;
+    background: url('/img/bg2.jpeg');
+    background-size: 100%;
+    background-position: left;
+    padding: 2rem 0;
+    .sidebar {
+        margin: 2rem 0 5rem 3rem;
+        .sideMenu{
+          padding: 1rem 1rem 1rem 2rem;
+          border-radius: 1rem;
+          background-color: #fff;
+          box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+          width: 13rem;
+          height: 20rem;
+          line-height: 5rem;
+          margin-right: 5rem;
+          li {
+              font-size: 2rem;
+          }
+          i{
+              margin-right: 0.5rem;
+            }
+      
+          a {
+            font-size: 1.3rem;
+            color: $darker-gray;
+            margin: 0 auto;
+            position: relative;
+
+            &:hover {
+                color: $text-color;
+            }
+            &#user{
+                color: $text-color;
+                font-weight: 700;
+            }
+          }
+        }
+      }
+    .userInfoContainer {
+        width: 100%;
+        border-radius: 1rem;
+        margin: 2rem 5rem 0 0;
+        background-color: #fff;
+        box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+        .heading {
+            font-size: 2rem;
+            margin-left: 2rem;
+            color: $text-color;
+            margin-top: 1rem;
+        }
+        .divider{
+            margin-left: 2rem;
+            @include divider(90);
+        }
+
+        form{
+            margin: 2rem 3rem;
+        }
+
+        .userData {
+            display: flex;
+            align-items: center;
+            width: 80%;
+            margin: 2rem 0;
+            height: 2.5rem;
+            font-size: 1.5rem;
+            label {
+                width: 25%;
+                opacity: 0.6;
+                text-align: end;
+            }
+
+            input {
+                margin-left: 2rem; 
+                background: transparent;
+                font-size: 1.3rem;
+                color: $black;
+                width: 100%;
+               &:not([disabled]){
+                border: 2px solid $gray;
+                border-radius: 0.3rem;
+                padding: 0.5rem 2rem 0.5rem 0.5rem;
+                &:focus{
+                    border: 2px solid $text-color;
+                }
+               }
+            }
+            select{
+                cursor: pointer;
+                margin-left: 2rem;
+                border: 1px solid $gray;
+                padding: 0.5rem 3rem 0.5rem 0.5rem;
+            }
+        }
+
+        .buttons {
+            margin: 3rem 4rem;
+            text-align: end;
+            .submitBtn {
+                cursor: pointer;
+                padding: 0.4rem 2rem;
+                border-radius: 5px;
+                // border: 1px solid $black;
+                font-size: 1.3rem;
+                background-color: $text-color;
+                color: #fff;
+                &:hover {
+                    background: $text-color;
+                    // border-color: $text-color;   
+                    color:#fff;
+                }
+            }
+        }
+    }
+
+    .sort-container {
+        display: flex;
+        justify-content: flex-end;
+        margin-top: 1rem;
+    }
+
+}
