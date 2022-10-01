@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <%- include('partials/head') %>
+</head>
+
+<body>
+  <%- include('partials/header') %>
+
+    <section class="classes">
+
+      <div class="heading">
+        <div class="page-heading">
+          <h1>烘焙小教室</span>
+            <!-- <span><img src="img/bake.png" alt=""></span> -->
+        </div>
+        <div class="breadcrumb">
+          <ul>
+            <li><a href="/">首頁</a></li>
+            <li><a href="">課程活動</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="classes-wrapper">
+        <div class="search-container">
+          <div class="search">
+            <input class="search-input" type="search" name="classSearch" placeholder="搜尋課程...">
+            <button class="searchBtn"><i class="fas fa-search"></i></button>
+          </div>
+        </div>
+
+        <div class="classCard">
+          <div class="classImg">
+            <a href="/classDetail"> <img src="img/class/class1.jpg"></a>
+          </div>
+          <div class="content">
+            <h2 class="classTitle"><a href="/classDetail">親手製作 - <span>日式布丁草莓蛋糕</span></a></h2>
+            <div class="classTime"><i class="fas fa-calendar"></i>2022/03/19 (六）14:00 ~ 16:30 </div>
+            <div class="divider"></div>
+            <div class="remain">
+              <span>剩餘人數:</span><span id="remainNum">5</span><span>人</span>
+            </div>
+            <div class="classInfo">
+              <h3>課程簡介</h3>
+              <p class="desc">濕潤綿密不甜膩的 完美海綿蛋糕x萬人迷手工布丁夾餡
+                和冬季主角"草莓"的完美組合，擁有一人嗑光一整顆的美味魔力!
+                從最簡單的打發攪拌手法，到進階的配方比例探討包含在這堂課中
+                不管是初學者或有經驗的同學都能收穫滿滿喔！</p>
+              <!-- <button onclick="location.href='/classForm'" class="signUpBtn">立即報名</button> -->
+            </div>
+          </div>
+        </div>
+        <div class="classCard">
+          <div class="classImg">
+            <a href="#"> <img src="img/class/bear 1-1.jpg"></a>
+          </div>
+          <div class="content">
+            <h2 class="classTitle"><a href="#">親手製作 - <span>奶油草莓小熊蛋糕</span></a></h2>
+            <div class="classTime"><i class="fas fa-calendar"></i>2022/03/20 (日）10:00 ~ 12:30 </div>
+            <div class="divider"></div>
+            <div class="remain">
+              <span>剩餘人數:</span><span id="remainNum">5</span><span>人</span>
+            </div>
+            <div class="classInfo">
+              <h3>課程簡介</h3>
+              <p class="desc">
+                親手製作蛋糕，就算是新手也能一次學會製作技巧！綿密奶油配上新鮮草莓點綴～製作出小熊造型的草莓奶油蛋糕！
+            </div>
+          </div>
+        </div>
+        <div class="classCard">
+          <div class="classImg">
+            <a href="#"> <img src="img/class/cookie-monster.jpeg"></a>
+          </div>
+          <div class="content">
+            <h2 class="classTitle"><a href="#">親手製作 - <span>小怪獸杯子蛋糕</span></a></h2>
+            <div class="classTime"><i class="fas fa-calendar"></i>2022/03/20 (日）14:00 ~ 16:30 </div>
+            <div class="divider"></div>
+            <div class="remain">
+              <span>剩餘人數:</span><span id="remainNum">8</span><span>人</span>
+            </div>
+            <div class="classInfo">
+              <h3>課程簡介</h3>
+              <p class="desc">Cookie Monster杯子蛋糕，是派對聚會、戶外野餐、下午茶點心的好選擇。
+                法國綠色山丘諾曼第無鹽發酵奶油跟法芙娜巧克力粉，做出香濃可口的巧克力杯子蛋糕，甜而不膩的質地，好吃到真的會上癮!
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="pagination">
+          <button class="paginationBtn prev-page" type="button">
+            <i class="fas fa-caret-left"></i>
+          </button>
+
+          <button class="pageNum" style="background-color: rgb(255, 157, 173); color: white;">1</button>
+          <button class="pageNum">2</button>
+          <button class="pageNum">3</button>
+
+          <button class="paginationBtn next-page" type="button">
+            <i class="fas fa-caret-right"></i>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer Section -->
+    <%- include('partials/footer') %>
+
+      <!-- Javascript -->
+      <%- include('javascript/script') %>
+
+</body>
+
+</html>

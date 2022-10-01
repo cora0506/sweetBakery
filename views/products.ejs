@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <%- include('partials/head') %>
+</head>
+
+<body>
+  <%- include('partials/header') %>
+
+    <section class="products">
+      <div class="heading">
+        <div class="page-heading">
+          <h1 data-categoryid="<%= (categoryId[0].categoryId) ? categoryId[0].categoryId : '0' %>">
+            <%= (categoryId[0].categoryName) ? categoryId[0].categoryName : "所有商品" %>
+          </h1>
+        </div>
+        <div class="breadcrumb">
+          <ul>
+            <li><a href="/">首頁</a></li>
+            <li><a href="">
+                <%= (categoryId[0].categoryName) ? categoryId[0].categoryName : "所有商品" %>
+              </a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="products-container">
+        <div class="productCategories">
+          <h1 class="subHeading">商品分類</h1>
+          <ul class="sideMenu">
+            <li><a class="category" href="/products">所有商品</a></li>
+            <% productCategory.forEach((category, index)=> { %>
+              <li><a href="/products/<%= index+1 %>" class="category">
+                  <%= category.categoryName %>
+                </a></li>
+              <% }) %>
+          </ul>
+        </div>
+        <div class="product-content">
+          <div class="sort-container">
+            <div class="productSort">
+              <form id="sortData" action="#" method="get">
+
+                <select name="sortVal" id="sortOption">
+                  <option value="0">預設排序</option>
+                  <option value="ASC">價格由低到高</option>
+
+                  <option value="DESC">價格由高到低</option>
+
+                </select>
+              </form>
+            </div>
+          </div>
+          <div class="product-grid">
+            <% productInformation.forEach(product=> { %>
+              <div class="productCard">
+                <% try { %>
+                  <% productPic.forEach(images=> { %>
+                    <% if(product.productId==images.productId) { %>
+                      <div class="card-image">
+                        <div class="imgLoader"></div>
+                        <a href="/productDetail"><img src="<%= images.imgPath %>"></a>
+                      </div>
+                      <% throw 'Break' %>
+                        <% } %>
+                          <% }) %>
+                            <% } catch (e) { if(e !=='Break' ) throw e } %>
+                              <div class="body-wrapper">
+                                <div class="card-body">
+                                  <div class="productTitle"><a href="/productDetail">
+                                      <%= product.productTitle %>
+                                    </a>
+                                  </div>
+                                  <div class="productPrice">NT$<%= product.productPrice %> / <%= product.sizeName %>
+                                  </div>
+                                </div>
+                                <div class="cartBtn">
+                                  <a type="button" href=""><i class="fas fa-shopping-cart"
+                                      data-pid="<%= product.productId %>"
+                                      data-cid="<%= (categoryId[0].categoryId)?categoryId[0].categoryId: product.categoryId%>"></i></a>
+                                </div>
+                              </div>
+              </div>
+              <% }) %>
+          </div>
+        </div>
+      </div>
+      </div>
+
+      <!-- Product Modal -->
+      <div class="modal-container">
+        <div class="modal-wrapper">
+          <button class="closeModal">&times;</button>
+          <div class="modal-body">
+            <div class="productImg">
+              <a href="/productDetail"><img src="/img/Cakes/choco-fruit 1-1.jpg"></a>
+            </div>
+            <div class="productCheckout">
+              <h2 class="productName">
+                <a href="/productDetail">水果巧克力蛋糕</a>
+              </h2>
+              <div class="priceAndSize">NT$350 / 6吋
+              </div>
+              <div class="productInfo">台灣第一款 如香水般有豐富層次的頂級巧克力蛋糕
+                入口前味微苦的巧克力，
+                中段帶有濃郁的咖啡香</div>
+              <div class="productQty">
+                <button class="minus btn fas fa-minus"></button>
+                <input id="productNum" class="inputNum" type="number" value="1">
+                <button class="plus btn fas fa-plus"></button>
+              </div>
+              <button class="addToCartBtn"><i class="fas fa-cart-plus"></i>加入購物車</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+
+    </section>
+
+    <!-- Footer Section -->
+    <%- include('partials/footer') %>
+
+      <!-- Javascript -->
+      <%- include('javascript/script') %>
+        <script>
+
+          $('.product-grid').on('click', '.fa-shopping-cart', function (e) {
+            $("#productNum").val(1)
+            e.preventDefault();
+            $(this).data("pid");
+            $('.modal-container').show();
+            // console.log($(this).data("pid"))
+            // console.log($(this).data("cid"))
+            // console.log(e);
+            $.ajax({
+              url: `/products/productInfo/${$(this).data("cid")}/${$(this).data("pid")}`,
+              type: 'get',
+              contentType: 'application/json',
+              // dataType: "json",
+              success: function (data) {
+                // console.log(data);
+                $('.productImg').find('a').find("img").attr("src", data.productPic[0].imgPath)
+                $('.productName').find('a').text(data.productInformation[0].productTitle);
+                $('.priceAndSize').text("NT$" + data.productInformation[0].productPrice + " / " + data.productInformation[0].sizeName);
+                $('.productInfo').text(data.productInformation[0].productInfo);
+              }
+            })
+
+
+          });
+
+          // select篩選
+          $('#sortOption').on('change', function () {
+            let categoryId = $('.page-heading>h1').data('categoryid');
+            let url = `/products/sortProduct/${categoryId}`;
+            $('#sortData').prop('action', url)
+            // console.log(categoryId)
+            $('#sortData').submit();
+            sessionStorage.setItem('selectOption', $('#sortOption').val());
+
+          })
+          let optionVal = sessionStorage.getItem('selectOption');
+          $('#sortOption').val(optionVal);
+          $('.sideMenu>li').on('click', function () {
+            sessionStorage.setItem('selectOption', 0);
+            $('#sortOption').val(sessionStorage.getItem('selectOption'));
+          })
+
+
+          if (!sessionStorage.getItem("cartKey")) {
+            $("#count").text(0)
+          } else {
+            $("#count").text(sessionStorage.getItem("cartKey"))
+          }
+
+
+          $(".addToCartBtn").on("click", function () {
+            let productNum = $('#productNum').val();
+            let productName = $('.productName a').text();
+            $.ajax({
+              url: "/products/cartClick",
+              data: {
+                productName: productName,
+                productNum: productNum
+              },
+              type: 'post',
+              success: function (jsonData) {
+                if (jsonData.username) {
+                  $(".modal-container").hide("fade")
+                  // var value = parseInt($("#productNum").val());
+                  // if (sessionStorage.getItem("cartKey") == null) {
+                  //   sessionStorage.setItem("cartKey", value)
+                  // } else {
+                  //   var data = parseInt(sessionStorage.getItem("cartKey"))
+                  //   data += value;
+                  //   sessionStorage.setItem("cartKey", data)
+                  // }
+                  $("#count").text(jsonData.data)
+                  console.log(sessionStorage.getItem("cartKey"));
+                } else {
+                  $('.modal-container').hide();
+                  $(".loginModal").show()
+                }
+              }
+            });
+          })
+
+          window.addEventListener("load", function () {
+            $(".imgLoader").css("display", "none")
+          })
+
+        </script>
+
+</body>
+
+</html>

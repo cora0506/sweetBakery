@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <%- include('partials/head') %>
+</head>
+
+<body>
+  <%- include('partials/header') %>
+
+    <section class="user">
+      <div class="sidebar">
+        <ul class="sideMenu">
+          <li>
+            <i class="fas fa-user"></i>
+            <a id="user" href="/user">我的檔案</a>
+          </li>
+          <li>
+            <i class="fa-solid fa-unlock-keyhole"></i>
+            <a href="/passwordUpdate">更改密碼</a>
+          </li>
+          <li>
+            <i class="fa-solid fa-clipboard-list"></i>
+            <a href="orders">會員訂單</a>
+          </li>
+        </ul>
+      </div>
+
+      <div class="userInfoContainer">
+        <h1 class="heading">個人基本資料</h1>
+        <div class="divider"></div>
+        <form action="/user/changeUserInfoContainer" method="post">
+          <div class="userData userAcount">
+            <label for="userAcount">會員帳號</label>
+            <input class="formInput" id="userAcount" name="userAcount" value="<%= userAcount.email %>" disabled></input>
+          </div>
+
+          <div class="userData">
+            <label for="userName">姓名</label>
+            <input class="formInput" id="userName" name="userName" value="<%= userName.userName %>"></input>
+          </div>
+
+          <div class="userData">
+            <label for="userMail">信箱</label>
+            <input class="formInput" id="userMail" name="userMail" value="<%= userEmail.email %>" disabled></input>
+          </div>
+
+          <div class="userData">
+            <label for="userPhone">聯絡電話</label>
+            <input class="formInput" id="userPhone" name="userPhone" value="<%= userPhone.userPhone %>"></input>
+          </div>
+
+          <div class="userData">
+            <label for="userBirthday">生日</label>
+            <input class="formInput" id="userBirthday" name="userBirthday" value="<%= moment(userBirthday.userBirthday).format('yy-MM-DD') %>" disabled></input>
+          </div>
+
+          <div class="buttons">
+            <button id="changeUserInfo" class="submitBtn" type="submit" value="儲存">
+              儲存
+            </button>
+          </div>
+        </form>
+      </div>
+
+    </section>
+
+    <!-- Footer Section -->
+    <%- include('partials/footer') %>
+
+      <!-- Javascript -->
+      <%- include('javascript/script') %>
+</body>
+
+</html>

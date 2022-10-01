@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <%- include('partials/head') %>
+</head>
+
+<body class="classDetailBG">
+  <%- include('partials/header') %>
+
+    <section class="classDetail">
+      <div class="heading">
+        <h1 class="page-heading"><span>課程介紹</span></h1>
+        <div class="breadcrumb">
+          <ul>
+            <li><a href="/"><i class="fas fa-home"></i>首頁</a></li>
+            <li><a href="/classes">
+                課程活動
+              </a></li>
+            <li><a href="">
+                課程介紹
+              </a></li>
+          </ul>
+        </div>
+
+        <!-- <div class="divider"></div> -->
+      </div>
+
+      <div class="content-wrapper">
+        <div class="classInfo">
+          <img src="img/class/class1.jpg">
+          <div class="classContent">
+              <h2 class="classTitle">親手製作 - 日式布丁草莓蛋糕</h2>
+              <div class="classTime">
+                <i class="fas fa-calendar"></i>
+                2022/03/19 (六) 14:00 ~ 16:30
+              </div>
+              <div class="remainNum">(剩餘名額: <span class="remain">5</span> 人)</div>
+            <div class="errorMsg">已超過上限人數</div>
+            <div class="inputPrice">
+              <div class="classPrice">NT$450</div>
+              <div style="text-align: end;" class="guest-input">
+                <label for="">人數:</label>
+                <button class="minus guestBtn fas fa-minus"></button>
+                <input id="guestNum" class="inputNum" type="number" value="1">
+                <button class="plus guestBtn fas fa-plus"></button>
+              </div>
+
+            </div>
+            <button onclick="location.href='/classForm'" class="signUpBtn">立即報名</button>
+            <!-- <button class="signUpBtn">立即報名</button> -->
+          </div>
+        </div>
+
+        <div class="classDesc">
+          <h3>詳細介紹</h3>
+          <div class="divider"></div>
+          <div class="detail">
+            <p>【日式經典 蜂蜜布丁草莓蛋糕】</p>
+            <p> 冬季限定草莓蛋糕新課part.1來了！
+              <br><br>
+              就像台灣中秋節一定要烤肉<br>
+              日本聖誕節則是草莓蛋糕（shortcake)
+              <br>
+            </p>
+            <p>濕潤綿密不甜膩的 完美海綿蛋糕x萬人迷手工布丁夾餡 <br>
+              和冬季主角〝草莓”的完美組合，擁有一人嗑光一整顆的美味魔力! <br>
+              從最簡單的打發攪拌手法，到進階的配方比例探討包含在這堂課中 <br>
+              不管是初學者或有經驗的同學都能收穫滿滿喔。
+            </p>
+            <div class="images">
+              <img src="img/class/class2.jpg">
+              <img src="img/class/class3.jpg">
+            </div>
+            <p>
+              【這堂課我們來學】<br>
+              ＊全蛋法打發海綿蛋糕 <br>
+              ＊攪拌麵糊的0失敗手法 <br>
+              ＊海綿蛋糕的配方比例探討 <br>
+              ＊免烘烤夾餡手工布丁製作教學 <br>
+              ＊海綿蛋糕不乾澀的秘訣操作 <br>
+              ＊簡單抹面的入門教學 <br>
+              ＊鮮奶油的使用入門教學 <br>
+            </p>
+          </div>
+
+          <h3><i class="fas fa-exclamation-circle"></i> 注意事項</h3>
+          <div class="divider"></div>
+          <p>
+            預約取消辦法：<br>
+            * 建議您出發日前 6 日內如須取消，可將名額轉讓。但請務必告知我們，代理參與者的姓名及聯絡資訊。<br>
+            * 如因天災等不可抗力因素，我們將主動聯繫延期或取消。</p>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Footer Section -->
+    <%- include('partials/footer') %>
+
+      <%- include('javascript/script') %>
+
+        <script>
+
+          sessionStorage.setItem("key", guestNum.value)
+
+        </script>
+
+</body>
+
+</html>

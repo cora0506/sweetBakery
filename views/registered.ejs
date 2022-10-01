@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <%- include('partials/head') %>
+</head>
+
+<body>
+  <%- include('partials/header') %>
+    <section class="registered">
+      <div class="sidebar">
+        <ul class="sideMenu">
+          <li>
+            <i class="fas fa-user"></i>
+            <a href="/user">我的檔案</a>
+          </li>
+          <li>
+            <i class="fa-solid fa-unlock-keyhole"></i>
+            <a href="/passwordUpdate">更改密碼</a>
+          </li>
+          <li>
+            <i class="fa-solid fa-clipboard-list"></i>
+            <a id="userOrder" href="/orders">會員訂單</a>
+          </li>
+        </ul>
+      </div>
+
+      <div class="content-wrapper">
+
+        <!------- 會員訂單Bar -------->
+        <div class="navBar">
+          <div class="nav-link">
+            <h3>會員訂單</h3>
+          </div>
+          <div class="nav-link">
+            <a class="userOrder" href="/orders">未取貨</a>
+          </div>
+          <div class="nav-link">
+            <a class="orderHistory" href="/orderHistory">購買紀錄</a>
+          </div>
+          <div class="nav-link">
+            <a class="classSearch active" href="/registered">課程查詢</a>
+          </div>
+        </div>
+
+        <!-- -----會員訂單-------- -->
+        <div class="class-wrapper">
+          <div class="myClass">
+            <div class="divider"></div>
+            <div class="classHeader">
+              <div class="col">課程名稱</div>
+              <div class="col">時間</div>
+              <div class="col">單價</div>
+              <div class="col">人數</div>
+              <div class="col">小計</div>
+            </div>
+            <div class="divider"></div>
+            <!-- -----會員訂單資訊-------- -->
+            <div class="classItems">
+              <div class="classThumbnail">
+                <img src="img/class/class1.jpg">
+              </div>
+              <div class="detail-wrapper">
+                <div class="col classTitle">
+                  <span>親手製作 - 日式布丁草莓蛋糕</span>
+                </div>
+                <div class="col classTime">
+                  <span>2022-01-15</span>
+                  <br>
+                  <span>13:30-17:30</span>
+                </div>
+                <div class="col classPrice">
+                  <span>$</span>
+                  <span>450</span>
+                </div>
+                <div class="col guestNum">
+                  <span>1</span>
+                </div>
+                <div class="col subtotal">
+                  <span>$</span>
+                  <span>450</span>
+                </div>
+              </div>
+            </div>
+            <div class="divider"></div>
+            <div class="totalPrice">
+              <span>總金額:</span>
+              <span>450</span>
+            </div>
+          </div>
+
+          <div class="myClass">
+            <div class="divider"></div>
+            <div class="classHeader">
+              <p class="col">課程名稱</p>
+              <p class="col">時間</p>
+              <p class="col">單價</p>
+              <p class="col">人數</p>
+              <p class="col">小計</p>
+            </div>
+            <div class="divider"></div>
+            <!-- -----會員訂單資訊-------- -->
+            <div class="classItems">
+              <div class="classThumbnail">
+                <img src="img/class/bear 1-1.jpg">
+              </div>
+              <div class="detail-wrapper">
+                <div class="col classTitle">
+                  <span>親手製作 - 奶油北極熊蛋糕</span>
+                </div>
+                <div class="col classTime">
+                  <span>2022-01-15</span>
+                  <br>
+                  <span>13:30-17:30</span>
+                </div>
+                <div class="col classPrice">
+                  <span>$</span>
+                  <span>300</span>
+                </div>
+                <div class="col guestNum">
+                  <span>2</span>
+                </div>
+                <div class="col subtotal">
+                  <span>$</span>
+                  <span>600</span>
+                </div>
+              </div>
+            </div>
+            <div class="divider"></div>
+            <div class="totalPrice">
+              <span>總金額:</span>
+              <span>600</span>
+            </div>
+          </div>
+        </div>
+
+    </section>
+
+    <!-- Footer Section -->
+    <%- include('partials/footer') %>
+
+      <!-- Javascript -->
+      <%- include('javascript/script') %>
+
+
+        <script>
+          var classData = JSON.parse(sessionStorage.getItem('classData'));
+          console.log(classData);
+          var classDate = (classData.classTime.substr(0, 11)).split('/');
+          var cDate = classDate.join('-');
+          console.log(cDate);
+
+
+          var cardHtml = `  
+        <div class="myClass">
+          <div class="divider"></div>
+          <div class="classHeader">
+            <div class="col">課程名稱</div>
+            <div class="col">時間</div>
+            <div class="col">單價</div>
+            <div class="col">人數</div>
+            <div class="col">小計</div>
+          </div>
+          <div class="divider"></div>
+          <!-- -----會員訂單資訊-------- -->
+          <div class="classItems">
+            <div class="classThumbnail">
+              <img src="${classData.classPic}">
+            </div>
+            <div class="detail-wrapper">
+              <div class="col classTitle">
+                <span>${classData.classTitle}</span>
+              </div>
+              <div class="col classTime">
+                <span>${cDate}</span>
+                <br>
+                <span>${classData.classTime.substr(15)}</span>
+              </div>
+              <div class="col classPrice">
+                <span>$</span>
+                <span>${classData.classPrice}</span>
+              </div>
+              <div class="col guestNum">
+                <span>${classData.guestNum}</span>
+              </div>
+              <div class="col subtotal">
+                <span>$</span>
+                <span>${classData.classtotal}</span>
+              </div>
+            </div>
+          </div>
+          <div class="divider"></div>
+          <div class="totalPrice">
+            <span>總金額:</span>
+            <span>${classData.classtotal}</span>
+          </div>
+        </div>
+        `
+          // $(cardHtml).appendTo(".navBar, .myClass");
+          $(".class-wrapper").prepend(cardHtml);
+        </script>
+</body>
+
+</html>

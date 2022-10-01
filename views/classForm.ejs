@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <%- include('partials/head') %>
+</head>
+
+<body>
+  <%- include('partials/header') %>
+
+
+    <section class="form">
+      <div class="heading">
+        <h1 class="page-heading"><span>已選擇課程</span></h1>
+        <div class="breadcrumb">
+          <ul>
+            <li><a href="/"><i class="fas fa-home"></i>首頁</a></li>
+            <li><a href="/classDetail">
+                課程介紹
+              </a>
+            </li>
+            <li><a href="">
+                已選擇課程
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="content-wrapper">
+
+        <div class="classInfo">
+          <img class="classImg" src="img/class/class1.jpg">
+          <div class="classContent">
+            <h2 class="classTitle">親手製作 - 日式布丁草莓蛋糕</h2>
+            <div class="classTime"><i class="fas fa-calendar"></i>2022/03/19 (六) 14:00-16:30</div>
+            <div class="classPrice">NT $450</div>
+            <div class="guest">報名人數: <span id="guestNum"></span>人</div>
+            <div class="classTotal">總金額:<span class="totalMoney">$1500</span> </div>
+          </div>
+        </div>
+
+        <div class="guest-info">
+          <h3>報名人資訊</h3>
+          <div class="divider"></div>
+          <div class="guestName">
+            <label for="guestName">姓名<span>*</span></label>
+            <input class="formInput" type="text" id="guestName" name="name" placeholder="請輸入姓名" required>
+          </div>
+          <div class="guestPhone">
+            <label for="guestPhone">聯絡電話<span>*</span></label>
+            <input class="formInput" type="tel" id="guestPhone" pattern="\d*" name="phone" minlength="10" maxlength="10"
+              placeholder="請輸入電話" required>
+          </div>
+          <div class="guestNotes">
+            <label for="guestNotes">備註</label>
+            <textarea class="formInput" name="notes" id="guestNotes" cols="60" rows="5"
+              placeholder="請輸入訊息..."></textarea>
+          </div>
+          <div class="buttons">
+            <a href="/registered"><button value="確認" class="submit">確認</button></a>
+            <span class="cancel"><a href="/classDetail">取消</a></span>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+
+
+    <!-- Footer Section -->
+    <%- include('partials/footer') %>
+
+      <!-- Javascript -->
+      <%- include('javascript/script') %>
+
+        <script>
+
+          var data = sessionStorage.getItem("guestKey")
+          var guestNum = document.getElementById("guestNum")
+
+          guestNum.innerText = data;
+
+          var Price = parseInt(($('.classPrice').text()).substr(4));
+          var guest = parseInt(($('.guest').text()).substr(6))
+          var classTotal = Price * guest;
+          $('.totalMoney').text("$" + classTotal);
+          console.log(guest)
+          var classtitle = $('.classTitle').text();
+          var classtime = $('.classTime').text();
+          var pic = $('.classImg').prop('src');
+          // console.log(data)
+          $('.submit').on('click', function () {
+            var data = { classPic: pic, classTitle: classtitle, classTime: classtime, classPrice: Price, guestNum: guest, classtotal: classTotal };
+            sessionStorage.setItem('classData', JSON.stringify(data));
+          })
+
+        </script>
+
+</body>
+
+</html>

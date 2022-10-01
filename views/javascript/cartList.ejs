@@ -1,0 +1,130 @@
+<script>
+
+  //裡面三個小的複選按鈕選中狀態跟著 全選按鈕走
+  //因為checked是複選框的固有屬性，此時利用prop（）獲取和設定該屬性
+  $(function () {
+    getSum();
+    $(".selectAll").change(function () {
+      // console.log($(this).prop("checked"));//全選按鈕的狀態
+      $(".chkbox,.selectAll").prop("checked", $(this).prop("checked"));
+      getSum();
+    })
+    //如果所有小按鈕的個數都被選了，全選按鈕就選上，如果小按鈕沒有被選上，則全選按鈕就不選上
+    //：checked選擇器，查詢本選中的表單元素
+    $(".chkbox").change(function () {
+      // console.log($(".chkbox:checked").length);//小複選框選中的個數
+      // console.log($(".chkbox").length);
+      //console.log($(this).prop("checked"));
+      if ($(".chkbox:checked").length === $(".chkbox").length) {
+        $(".selectAll").prop("checked", true);
+      } else {
+        $(".selectAll").prop("checked", false);
+      }
+      getSum();
+      if ($(this).prop("checked")) {
+        $(this).parents("tr").addClass("current");
+      } else {
+        $(this).parents("tr").removeClass("current");
+      }
+    })
+
+    $(".add").click(function () {
+      let n = parseInt($(this).siblings(".num").val());
+      //console.log(n);
+      n++;
+      $(this).siblings(".num").val(n);
+      let price = parseInt($(this).parent().siblings(".price").text());
+      // price = price.substr(1);
+      //console.log(price);
+      $(this).parent().siblings(".subtotal").text(n * price);
+      getSum();
+    })
+    $(".sub").click(function () {
+      let n = parseInt($(this).siblings(".num").val());
+      //console.log(n);
+      if (n === 1) {
+        return false;
+      }
+      n--;
+      $(this).siblings(".num").val(n);
+      let price = parseInt($(this).parent().siblings(".price").text());
+      // price = price.substr(1);
+      //console.log(price);
+      $(this).parent().siblings(".subtotal").text(n * price);
+      getSum();
+    })
+    //使用者也可以直接修改表單num裡面的值（小bug），同樣計算小計
+    $(".num").change(function () {
+      let n = $(this).val();
+      let price = parseInt($(this).parent().siblings(".price").text());
+      // console.log(price);
+      $(this).parent().siblings(".subtotal").text(n * price);
+      getSum();
+      // console.log("測試:"+ price)
+    })
+
+    function getSum() {
+      let count = 0; //計算總件數
+      let money = 0; //計算總價錢
+      $(".num").each(function (index) {
+        if ($(".chkbox").eq(index).prop("checked") == true) {
+          count += parseInt($(".num").eq(index).val());
+          money += parseInt($(".subtotal").eq(index).text().substr(0));
+          // console.log(money);
+        }
+      })
+      $(".num_sum").text(count);
+      $(".sum").text(money);
+    }
+
+    //刪除商品模組
+    //點選刪除之後一定是刪除當前的商品，所以從$(this)出發
+    $(".delete").click(function () {
+      //刪除的是當前的商品
+      $(this).parent().remove();
+      $(".chkbox").change();
+      getSum();
+      clearselectAll();
+    })
+
+    
+
+    // //刪除選定的商品:小的複選框如果選中就刪除對應的商品
+    // $(".delSelected").click(function () {
+    //   //刪除的是選中的商品
+    //   $(".chkbox:checked").parent().parent().remove();
+    //   getSum();
+    //   clearselectAll();
+    // })
+    // //清空購物車
+    // $(".delAll").click(function () {
+    //   $(".tab tbody").empty();
+    //   getSum();
+    //   clearselectAll();
+    // })
+
+    // function clearselectAll() {
+    //   if ($(".tab tbody")[0].innerText == '') {
+    //     $(".selectAll").prop("checked", false);
+    //   }
+    // }
+  })
+
+
+
+
+  // ------------------Swiper JS-------------
+  var swiper = new Swiper(".mySwiper", {
+    slidesPerView: 4,
+    spaceBetween: 0,
+    slidesPerGroup: 2,
+    loop: true,
+    loopFillGroupWithBlank: false,
+    navigation: {
+      // nextEl: ".swiper-button-next",
+      // prevEl: ".swiper-button-prev",
+      nextEl: ".fa-angle-right",
+      prevEl: ".fa-angle-left",
+    },
+  });
+</script>

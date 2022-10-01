@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <%- include('partials/head') %>
+
+</head>
+
+<body>
+  <%- include("partials/header") %>
+
+    <section class="cart">
+
+      <div class="container">
+        <!-- 我的購物清單title -->
+        <div class="heading">
+          <h1 class="page-heading">我的購物清單</h1>
+        </div>
+        <div class="divider"></div>
+
+        <!-- container -->
+        <table class="tab">
+          <thead class="head">
+            <th>
+              <input type="checkbox" class="selectAll">
+            </th>
+            <th class="thPic">商品照片</th>
+            <th class="thName">商品名稱</th>
+            <th class="thSize">規格</th>
+            <th class="thPrice">單價</th>
+            <th class="thNum">數量</th>
+            <th class="thSum">小計</th>
+            <th class="thAction">操作</th>
+          </thead>
+          <tbody>
+            <% productInformation .forEach(proInform=> { %>
+              <tr>
+                <td><input type="checkbox" class="chkbox" /></td>
+                <td>
+                  <% productPic .forEach(images=> { %>
+                    <% if(proInform.productId==images.productId){ %>
+                      <% if ((images.productImgId % 3)==1) { %>
+                        <img src="<%= images.imgPath %>" alt="">
+                        <% } %>
+                          <% } %>
+                            <% }) %>
+                </td>
+                <td class="productName">
+                  <%= proInform.productTitle %>
+                </td>
+                <td class="productSize">
+                  <%= proInform.sizeName %>
+                </td>
+                <td class="price">
+                  <%= proInform.productPrice %>
+                </td>
+                <td class="amount">
+                  <button type="button" class="sub">&#8722;</button>
+                  <input type="number" name="" value="<%= proInform.productNum %>" class="num"
+                    id="<%=proInform.productId%>">
+                  <button type="button" class="add">&#x2B;</button>
+                </td>
+                <td class="subtotal">
+                  <%= proInform.subTotal %>
+                </td>
+                <td class="delete"><i class="fas fa-times"></td>
+              </tr>
+              <% }) %>
+          </tbody>
+        </table>
+
+        <!-- 總計 -->
+        <div class="totalPrice">
+          <span>已選<span class="num_sum">1</span>件商品</span>
+          <span>總計:</span>
+          <span class="sum">0</span>
+          <div class="btn">
+            <span class="confirm">確認訂單</span>
+          </div>
+
+        </div>
+
+        <!-- 推薦商品 -->
+        <div class="recommendItems">
+          <h2 class="recHeading">推薦商品</h2>
+          <!-- <div class="swiper-slide"> -->
+          <div class="productRec">
+            <div class="productCard">
+              <div class="card-image">
+                <a href="#"><img src="img/cupcake.jpg" /></a>
+              </div>
+              <div class="body-wrapper">
+                <div class="card-body">
+                  <div class="productName"><a href="#">香草杯子蛋糕</a></div>
+                  <span class="productPrice">NT $500</span>
+                </div>
+                <div class="cartBtn">
+                  <i class="fas fa-shopping-cart"></i>
+                </div>
+              </div>
+            </div>
+            <!-- </div> -->
+            <!-- <div class="swiper-slide"> -->
+            <div class="productCard">
+              <div class="card-image">
+                <a href="#"><img src="img/bestseller/best2.jpg" /></a>
+              </div>
+              <div class="body-wrapper">
+                <div class="card-body">
+                  <div class="productName"><a href="#">草莓果醬餅乾</a></div>
+                  <span class="productPrice">NT $450</span>
+                </div>
+                <div class="cartBtn">
+                  <i class="fas fa-shopping-cart"></i>
+                </div>
+              </div>
+            </div>
+            <!-- </div> -->
+            <!-- <div class="swiper-slide"> -->
+            <div class="productCard">
+              <div class="card-image">
+                <a href="/productDetail"><img src="img/cookies/cookie1.jpeg" /></a>
+              </div>
+              <div class="body-wrapper">
+                <div class="card-body">
+                  <div class="productName">
+                    <a href="/productDetail">撒糖屑曲奇餅乾</a>
+                  </div>
+                  <span class="productPrice">NT $500</span>
+                </div>
+                <div class="cartBtn">
+                  <i class="fas fa-shopping-cart"></i>
+                </div>
+              </div>
+            </div>
+            <!-- </div> -->
+            <!-- <div class="swiper-slide"> -->
+            <div class="productCard">
+              <div class="card-image">
+                <img src="img/cupcake.jpg" />
+              </div>
+              <div class="body-wrapper">
+                <div class="card-body">
+                  <div class="productName">香草杯子蛋糕</div>
+                  <span class="productPrice">NT $500</span>
+                </div>
+                <div class="cartBtn">
+                  <i class="fas fa-shopping-cart"></i>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- </div> -->
+        </div>
+    </section>
+
+
+    <%- include('partials/footer') %>
+
+
+      <!-- ------------------------------------------------ -->
+      <!-- Swiper JS -->
+      <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+
+      <%- include('javascript/script') %>
+        <%- include('javascript/cartList') %>
+
+          <script>
+            //進入頁面抓購物車數量
+            $(document).ready(function () {
+              $.ajax({
+                url:'/cart/cartProductNum',
+                data:{},
+                type:'get',
+                success: function (jsonData) {
+                  $("#count").text(jsonData.data);
+                }
+              })
+            })
+
+            //-------------更改數量可以同時存進資料庫------------- 
+
+            // input更改數量的值可以儲存進資料庫
+            $('.num').on('blur', function () {
+              if ($(this).val() == '') {
+              } else {
+                let data = {
+                  inputVal: $(this).val(),
+                  pId: $(this).attr('id')
+                };
+                $.ajax({
+                  url: '/cart/updateNum/input',
+                  type: 'put',
+                  data: data,
+                  success: function (data) {
+                    console.log(data);
+                  }
+                })
+              }
+
+            })
+
+            // 加,減 更改數量的值可以儲存進資料庫
+            $('.amount button').on('click', function () {
+              if ($(this).attr('class') == "add") {
+                inputVal = parseInt($(this).parent('.amount').find('input').val()) + 1
+              } else {
+                inputVal = parseInt($(this).parent('.amount').find('input').val()) - 1
+              }
+              let data = {
+                inputVal,
+                pId: $(this).parent('.amount').find('input').attr('id')
+              };
+              console.log(inputVal);
+
+              $.ajax({
+                url: '/cart/updateNum/input',
+                type: 'put',
+                data: data,
+                success: function (data) {
+                  console.log(data);
+                  $("#count").text(data.data);
+                }
+              })
+            })
+
+
+            // 刪除訂單可以刪除資料庫資料
+            $('.delete').click(function () {
+              let data = {
+                pId: $(this).parent('tr').find('.amount').find('input').attr('id')
+              };
+              // console.log(data)
+              $.ajax({
+                url: '/cart/updateNum/delete',
+                type: 'post',
+                data: data,
+                success: function (data) {
+                  $("#count").text(data.data);
+                }
+              })
+            });
+
+
+            //-------------確認訂單-----------------
+
+            // 全選後，可以將勾選的"checkbox Box" 紀錄進資料庫
+            // $(".selectAll").click(function(){
+            //   let y= $(this).closest('.tab').find('tbody').find('.num');
+            //   y.each(function(){
+            //         console.log($(this).prop('id'));
+            //   });
+            //   // console.log(idArray)
+            // });
+
+            // // 可以將勾選的"checkbox Box" 紀錄進資料庫
+            // $(".chkbox").click(function () {
+            //   //選中的商品
+            //   if($(this).prop('checked') == true){
+            //     let x = $(this).closest('tr').find('.amount').find('input').attr('id');
+            //     // console.log("商品ID:"+x);
+            //   }
+            // })
+
+
+            var arr = [];
+
+            $('.confirm').on('click', function () {
+              $('tr').each(function () {
+                let z = $(this).find('.chkbox').prop('checked');
+                if (z == true) {
+                  arr.push($(this).find('.num').attr('id'));
+                }
+              })
+              if (arr.length != 0) {
+                sessionStorage.setItem('pid', JSON.stringify({ id: arr }));
+                window.location = "/checkout";
+                arr = [];
+              } else {
+                $('.confirm').prop('disable');
+                Swal.fire({
+                  icon: 'warning',
+                  title: '忘記勾選商品囉!',
+                  text: '選越多，賺越多!'
+                })
+              }
+
+            })
+
+            //讀取畫面拿到購物車數量
+
+          </script>
+</body>
+
+</html>

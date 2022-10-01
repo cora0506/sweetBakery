@@ -1,0 +1,377 @@
+<script>
+  $(document).ready(function () {
+
+    /** reload page **/
+    var perfEntries = performance.getEntriesByType("navigation");
+
+    if (perfEntries[0].type === "back_forward") {
+      location.reload(true);
+    }
+
+    /** increment/decrement **/
+    var remain = parseInt($(".remain").text())
+
+    $(".plus").on("click", function () {
+
+      var inputNum = $(".inputNum");
+      var value = $(".inputNum").val();
+      value++;
+      inputNum.val(value);
+      console.log(value)
+
+      if (value > remain) {
+        $(".errorMsg").css("visibility", "visible");
+        $(".signUpBtn").prop("disabled", true);
+      } else {
+        $(".errorMsg").css("visibility", "hidden");
+        $(".signUpBtn").prop("disabled", false);
+      }
+
+    })
+
+    $(".inputNum").on("keyup", function () {
+      var value = $(".inputNum").val();
+
+      if (value > remain) {
+        $(".errorMsg").css("visibility", "visible");
+        $(".signUpBtn").prop("disabled", true);
+      } else {
+        $(".errorMsg").css("visibility", "hidden");
+        $(".signUpBtn").prop("disabled", false);
+      }
+
+    })
+
+    $(".minus").on("click", function () {
+
+      var inputNum = $(".inputNum");
+      var value = $(".inputNum").val();
+
+      if (value > 1) {
+        --value;
+        inputNum.val(value);
+      }
+      console.log(value)
+
+      if (value <= remain) {
+        $(".errorMsg").css("visibility", "hidden");
+        $(".signUpBtn").prop("disabled", false)
+      } else {
+        $(".errorMsg").css("visibility", "visible");
+        $(".signUpBtn").prop("disabled", true)
+      }
+    })
+
+    $(".signUpBtn").on("click", function () {
+      var value = $(".inputNum").val();
+      sessionStorage.setItem("guestKey", value)
+      var data = sessionStorage.getItem("guestKey")
+      console.log(`session storage ${data}`)
+    })
+
+
+    //open product modal when click on product cart
+    $(".fa-shopping-cart").on("click", () => {
+      $(".modal-container").show()
+    })
+
+    //close product modal when click on X
+    $(".closeModal").on("click", function () {
+      $(".modal-container").hide()
+    })
+
+
+    //toggle burger menu on click
+    $(".burgerMenu").on("click", function (e) {
+      $(".nav-items").toggleClass("active")
+    })
+
+    $(window).resize(function () {
+      if ($(".nav-items").hasClass("active")) {
+        $(".nav-items").removeClass("active");
+      }
+    })
+
+    //Sign in and sign up events
+    $("#signUp").on("click", () => {
+      $(".container").addClass("right-panel-active")
+      console.log("signup")
+    })
+
+    $("#signIn").on("click", () => {
+      $(".container").removeClass("right-panel-active")
+      console.log("signin")
+    })
+
+    $(".userIcon").on("click", function () {
+      $(".loginModal").show()
+    })
+
+    $('.dropdown-login').on('click', function () {
+      $(".loginModal").show();
+    })
+
+    //Close login/forget pw modal event
+    $(".closeModal").on("click", function () {
+      $(".loginModal").hide()
+      $(".forgetPwModal").hide()
+    })
+
+    //click forgetpwbtn to open modal
+    $(".forgetPwBtn").on("click", function () {
+      $(".loginModal").hide()
+      $(".forgetPwModal").show()
+    })
+
+    //click loginbtn to open modal
+    $(".loginBtn").on("click", function () {
+      $(".forgetPwModal").hide()
+      $(".loginModal").show()
+    })
+
+    //close login modal when click outside
+    $(".modal-overlay").on("click", function () {
+      $(".loginModal").hide()
+    })
+
+    // toggle search input field
+    $(".searchBtn").on("click", function () {
+      // $(".search-input").toggleClass("active")
+      console.log("ok")
+    })
+
+
+    /* Product Search Function */
+    var productTitleArray = [];
+
+    //refresh productTitleLength
+    function refreshproductTitleLength() {
+      productTitleArray = [];
+      var productTitleLength = $('.productTitle').length;
+      for (i = 0; i < productTitleLength; i++) {
+        productTitleArray.push({ name: $('.productTitle:eq(' + i + ')').text() });
+      }
+    }
+
+    refreshproductTitleLength();
+
+
+    // keyDown search btn  
+    $(".searchBtn").on("click", function (e) {
+      $(".search-input").toggleClass("active");
+      $(`.productTitle`).parents(".productCard").css("display", "none");
+      var val = $.trim($('.search-input').val()); //copy search inputContent    "trim" > remove space 
+      if (val) {
+        val = val.toLowerCase();
+        console.log("val: " + val)
+        $.each(productTitleArray, function (_, item) {
+          if (item.name.toLowerCase().indexOf(val) != -1) {
+            $(`.productTitle:contains('${val}')`).parents(".productCard").css("display", "");
+          }
+        });
+      } else {
+        $(`.productTitle`).parents(".productCard").css("display", "");
+      }
+      // refresh again
+      refreshproductTitleLength();
+    })
+
+
+    //change images when click on thumbnail
+    for (var i = 0; i < $(".thumbnail").length; i++) {
+      $(".thumbnail").on("click", function () {
+        if ($(".active").length > 0) {
+          $(".active").removeClass("active")
+        }
+        $(this).addClass("active")
+        $("#featured").attr("src", $(this).attr("src"))
+      })
+    }
+
+    //會員資訊
+    var userCurrentName;
+    var userCurrentEmail;;
+    var userCurrentPhone;
+    var userCurrentBirthday;
+
+
+    // 會員註冊
+    $('#signupBtn').on('click', function () {
+      let memberRegisterName = $("input[ name= memberRegisterName ]").val();
+      let memberRegisterEmail = $("input[ name = memberRegisterEmail ]").val();
+      let memberRegisterPassword = $("input[ name = memberRegisterPassword ]").val();
+      let memberRegisterCheckPassword = $("input[ name = memberRegisterCheckPassword ]").val();
+      let memberRegisterPhone = $("input[ name = memberRegisterPhone ]").val();
+      let memberRegisterBirthday = $("input[ name = memberRegisterBirthday ]").val();
+      console.log(memberRegisterBirthday);
+      $.ajax({
+        url: "/login/memberRegister",
+        data: {
+          name: memberRegisterName,
+          email: memberRegisterEmail,
+          password: memberRegisterPassword,
+          checkPassword: memberRegisterCheckPassword,
+          phone: memberRegisterPhone,
+          birthday: memberRegisterBirthday
+        },
+        type: "post",
+        success: function (jsonData) {
+          switch (jsonData.data) {
+            case 0: //帳號已存在
+              Swal.fire({
+                icon: 'info',
+                title: '帳號已存在，請更換帳號',
+                showConfirmButton: false,
+                timer: 1700
+              });
+              break;
+            case 1: //密碼比對錯誤
+              Swal.fire({
+                icon: 'warning',
+                title: '確認密碼與密碼不相符，請再次輸入',
+                showConfirmButton: false,
+                timer: 1700
+              });
+              break;
+            case 2: //註冊成功
+              Swal.fire({
+                icon: 'success',
+                title: '帳號註冊成功',
+                showConfirmButton: false,
+                timer: 1700
+              })
+              setTimeout(() => {
+                $(".container").removeClass("right-panel-active");
+              }, 2000);
+              break;
+            default:
+              console.log("狀態錯誤");
+              break;
+          }
+        }
+      })
+    })
+
+    //會員登入
+    $('#loginBtn').on('click', function () {
+      let loginEmail = $("input[ name= memberLoginEmail ]").val();
+      let loginPassword = $("input[ name = memberLoginPassword ]").val();
+      $.ajax({
+        url: "/login/memberLogin",
+        data: { email: loginEmail, password: loginPassword },
+        type: "post",
+        success: function (jsonData) {
+          switch (jsonData.data) {
+            case 0: //帳號不存在
+              Swal.fire({
+                // position: 'top',
+                icon: 'warning',
+                title: '帳號不存在，請註冊帳號',
+                showConfirmButton: false,
+                timer: 1700
+              });
+              break;
+            case 1: //密碼錯誤
+              Swal.fire({
+                // position: 'top',
+                icon: 'error',
+                title: '密碼錯誤，請再次輸入',
+                showConfirmButton: false,
+                timer: 1700
+              });
+              break;
+            case 2: //登入成功
+              Swal.fire({
+                // position: 'top',
+                icon: 'success',
+                title: '帳號登入成功',
+                showConfirmButton: false,
+                timer: 1700
+              })
+              setTimeout(() => {
+                window.location.href = "/";
+              }, 2000);
+              break;
+            default:
+              console.log("狀態錯誤");
+              break;
+          }
+        }
+      })
+    });
+
+    //變更密碼
+    $('#changePasswordBtn').on('click', function () {
+      Swal.fire({
+        icon: 'success',
+        title: '密碼修改完成',
+        showConfirmButton: false,
+        timer: 1700
+      });
+    })
+
+    //會員狀態
+    $('.userIcon').mouseenter(function () {
+      $.ajax({
+        url: "/login/userCurrentCondition",
+        data: {},
+        type: "post",
+        success: function (jsonData) {
+          console.log(jsonData.userCondition);
+          if (jsonData.userCondition) {
+            $('.dropdown').css('display', 'block');
+            console.log('1');
+          } else {
+            $('.dropdown-login').css('display', 'block');
+            console.log('0');
+          }
+        }
+      })
+    })
+
+    $('.icons').mouseleave(function () {
+      $('.dropdown').css('display', 'none');
+      $('.dropdown-login').css('display', 'none');
+    })
+
+    //會員登出
+    $('#userLogOut').on('click', function () {
+      $.ajax({
+        url: '/login/logout',
+        data: {},
+        type: "post",
+        success: function (jsonData) {
+          //刪除會員username
+          console.log(jsonData.data);
+
+          window.location.href = "/";
+        }
+      })
+    })
+
+    // 會員資料變更
+    $('#changeUserInfo').on('click', function () {
+      Swal.fire({
+        position: 'top',
+        icon: 'success',
+        title: '會員基本資料修改完成',
+        showConfirmButton: false,
+        timer: 1700
+      });
+    })
+
+    // 點選購物車按鈕新增數量在購物車上
+    $('.cartIcon').on('click', function () {
+      $.ajax({
+        url:'/cart/productNum/cartIcon',
+        data:{},
+        type:'post',
+        success: function (jsonData) {
+          console.log('front-------');
+          window.location.href = "/cart";
+          $("#count").text(jsonData.data);
+        }
+      })
+    })
+  })
+</script>

@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <%- include('head') %>
+
+</head>
+
+<body>
+  <header>
+    <div class="burgerMenu">
+      <span class="bar"></span>
+      <span class="bar"></span>
+      <span class="bar"></span>
+    </div>
+    <nav class="navbar">
+      <div class="logo">
+        <a href="/"><img src="/img/logo.svg" alt="呷甜甜"></a>
+      </div>
+      <div class="menu">
+        <ul class="nav-items">
+          <li><a href="/about" class="nav-link">品牌形象</a></li>
+          <li><a href="/products" class="nav-link">商品總覽</a></li>
+          <li><a href="/classes" class="nav-link">課程活動</a></li>
+        </ul>
+        <div class="search-wrapper">
+          <div class="searchForm" action="/">
+            <input class="search-input" type="search" name="productSearch" placeholder="搜尋商品...">
+            <button type="button" class="searchBtn">
+              <svg width="1.3rem" height="1.3rem" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="#4d4d4d">
+                <title>Asset 19</title>
+                <g id="Layer_2" data-name="Layer 2">
+                  <g id="Layer_1-2" data-name="Layer 1">
+                    <path class="cls-1"
+                      d="M63.22,59.45,47.3,43.53a26.7,26.7,0,1,0-3.77,3.77L59.45,63.22a2.67,2.67,0,0,0,3.77-3.77ZM26.67,48A21.34,21.34,0,1,1,48,26.67,21.36,21.36,0,0,1,26.67,48Z" />
+                  </g>
+                </g>
+              </svg>
+            </button>
+          </div>
+        </div>
+
+        <div class="icons">
+          <div class="userIcon">
+            <a href="#">
+              <svg width="1.5rem" height="1.5rem" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" fill="#4d4d4d">
+                <title />
+                <g id="about">
+                  <path d="M16,16A7,7,0,1,0,9,9,7,7,0,0,0,16,16ZM16,4a5,5,0,1,1-5,5A5,5,0,0,1,16,4Z" />
+                  <path
+                    d="M17,18H15A11,11,0,0,0,4,29a1,1,0,0,0,1,1H27a1,1,0,0,0,1-1A11,11,0,0,0,17,18ZM6.06,28A9,9,0,0,1,15,20h2a9,9,0,0,1,8.94,8Z" />
+                </g>
+              </svg>
+            </a>
+          </div>
+          <div class="dropdown">
+            <div class="arrow-up">
+              <ul>
+                <li><a href="/user">我的帳戶</a></li>
+                <li><a href="/orders">會員訂單</a></li>
+                <li><a href="#" id="userLogOut">登出</a></li>
+              </ul>
+            </div>
+          </div>
+          &nbsp;
+          <div class="cartIcon">
+            <a href="/#">
+              <svg xmlns="http://www.w3.org/2000/svg" width="1.5rem" height="1.5rem" viewBox="0 0 32 32" fill="none"
+                stroke="#4d4d4d" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+                <path d="M6 6 L30 6 27 19 9 19 M27 23 L10 23 5 2 2 2" />
+                <circle cx="25" cy="27" r="2" />
+                <circle cx="12" cy="27" r="2" />
+              </svg>
+              <div class="cartItems">
+                <span id="count">0</span>
+              </div>
+            </a>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Sign in and Sign up Modal -->
+    <div class="loginModal">
+      <div class="container">
+        <div class="closeModal">&times;</div>
+        <div class="form-container sign-up-container">
+          <div class="userLoginDiv">
+            <h1>會員註冊</h1>
+            <input class="name" type="text" placeholder="姓名" name="memberRegisterName" required />
+            <input class="signupEmail" type="email" placeholder="電子信箱" name="memberRegisterEmail" required />
+            <input class="signupPassword" type="password" placeholder="密碼" name="memberRegisterPassword" required />
+            <input class="signupCheckPassword" type="password" placeholder="確認密碼" name="memberRegisterCheckPassword"
+              requried />
+            <input class="signupPhoneNumber" type="tel" pattern="\d*" minlength="10" maxlength="10" placeholder="手機號碼"
+              name="memberRegisterPhone" requried />
+            <input class="signupDate" type="date" name="memberRegisterBirthday">
+            <button id="signupBtn" class="signupBtn" type="submit">註冊</button>
+          </div>
+        </div>
+        <div class="form-container sign-in-container">
+          <div class="userLoginDiv">
+            <h1>會員登入</h1>
+            <input class="loginEmail" type="email" placeholder="電子信箱" name="memberLoginEmail" required />
+            <input class="loginPassword" type="password" placeholder="密碼" name="memberLoginPassword" required />
+            <a class="forgetPwBtn" href="#">忘記密碼?</a>
+            <button id="loginBtn" class="loginBtn" type="submit">登入</button>
+          </div>
+        </div>
+        <div class="overlay-container">
+          <div class="overlay">
+            <div class="overlay-panel overlay-left">
+              <span id="signIn">已是會員？ 登入</span>
+            </div>
+            <div class="overlay-panel overlay-right">
+              <span id="signUp">不是會員？註冊</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-overlay"></div>
+    </div>
+
+    <!-- Forget Password Modal -->
+    <div class="forgetPwModal">
+      <div class="container">
+        <div class="closeModal">&times;</div>
+        <div class="form-container">
+          <img src="/img/image.png" alt="">
+          <form action="/login/memberForgetPassword" method="post">
+            <h1>忘記密碼</h1>
+            <input type="email" name="memberForgetEmail" placeholder="電子信箱" required />
+            <button class="sendBtn" type="submit">送出</button>
+            <br>
+            <div class="login">
+              <a class="loginBtn" href="#">登入</a>
+            </div>
+          </form>
+        </div>
+      </div>
+      <div class="modal-overlay"></div>
+    </div>
+
+  </header>
+
+
+  <script>
+    $(document).ready(function () {
+      $('.nav-link').on("click", function () {
+        $(this).addClass("active")
+        console.log($(this))
+      })
+    })
+  </script>
+</body>
+
+</html>

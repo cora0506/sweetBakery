@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <%- include('partials/head') %>
+</head>
+
+<body>
+  <%- include('partials/header') %>
+
+    <section class="userOrderHistory">
+      <div class="sidebar">
+        <ul class="sideMenu">
+          <li>
+            <i class="fas fa-user"></i>
+            <a href="/user">我的檔案</a>
+          </li>
+          <li>
+            <i class="fa-solid fa-unlock-keyhole"></i>
+            <a href="/passwordUpdate">更改密碼</a>
+          </li>
+          <li>
+            <i class="fa-solid fa-clipboard-list"></i>
+            <a id="userOrder" href="#">會員訂單</a>
+          </li>
+        </ul>
+      </div>
+
+      <div class="content-wrapper">
+
+        <!------- 會員訂單Bar -------->
+        <div class="navBar">
+          <div class="nav-link">
+            <h3>會員訂單</h3>
+          </div>
+          <div class="nav-link">
+            <a class="userOrder" href="/orders">未取貨</a>
+          </div>
+          <div class="nav-link">
+            <a class="orderHistory active" href="/orderHistory">購買紀錄</a>
+          </div>
+          <div class="nav-link">
+            <a class="classSearch" href="/registered">課程查詢</a>
+          </div>
+        </div>
+
+        <!-- -----會員訂單-------- -->
+        <div class="orderCard">
+          <div class="orderDetail">
+            <div class="orderNumber">
+              <span>訂單編號:</span>
+              <span>202201190002</span>
+            </div>
+            <div class="orderDate">
+              <span>訂購日期:</span>
+              <span>01/12/2022</span>
+            </div>
+            <div class="orderStatus">
+              <span>狀態:</span>
+              <span>已取貨</span>
+            </div>
+          </div>
+          <div class="divider"></div>
+          <div class="orderHeader">
+            <div class="col">單價</div>
+            <div class="col">規格</div>
+            <div class="col">商品名稱</div>
+            <div class="col">數量</div>
+            <div class="col">小計</div>
+          </div>
+          <div class="divider"></div>
+          <!-- -----會員訂單資訊-------- -->
+          <div class="orderItems">
+            <div class="orderThumbnail">
+              <img src="img/cookies/cookie1.jpeg">
+            </div>
+            <div class="detail-wrapper">
+              <div class="col itemTitle">
+                <span>撒糖屑曲奇餅乾</span>
+              </div>
+              <div class="col itemSize">
+                <span>1盒8入</span>
+              </div>
+              <div class="col itemPrice">
+                <span>$300</span>
+              </div>
+              <div class="col itemQty">
+                <span>2</span>
+              </div>
+              <div class="col subtotal">
+                <span>$300</span>
+              </div>
+            </div>
+          </div>
+          <div class="divider"></div>
+          <div class="totalPrice">
+            <span>總金額:</span>
+            <span>600</span>
+          </div>
+        </div>
+
+
+        <div class="orderCard">
+          <div class="orderDetail">
+            <div class="orderNumber">
+              <span>訂單編號:</span>
+              <span>202201190002</span>
+            </div>
+            <div class="orderDate">
+              <span>訂購日期:</span>
+              <span>01/12/2022</span>
+            </div>
+            <div class="orderStatus">
+              <span>狀態:</span>
+              <span>已取貨</span>
+            </div>
+          </div>
+
+          <div class="divider"></div>
+
+          <div class="orderHeader">
+            <p class="col">商品名稱</p>
+            <p class="col">規格</p>
+            <p class="col">單價</p>
+            <p class="col">數量</p>
+            <p class="col">小計</p>
+          </div>
+
+          <div class="divider"></div>
+
+          <div class="orderItems">
+            <div class="orderThumbnail">
+              <img src="img/cookies/cookie1.jpeg">
+            </div>
+            <div class="detail-wrapper">
+              <div class="col itemTitle">
+                撒糖屑曲奇餅乾
+              </div>
+              <div class="col itemSize">
+                1盒8入
+              </div>
+              <div class="col itemPrice">
+                <span>$</span>
+                <span>300</span>
+              </div>
+              <div class="col itemQty">
+                2
+              </div>
+              <div class="col subtotal">
+                <span>$</span>
+                <span>300</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="orderItems">
+            <div class="orderThumbnail">
+              <img src="img/Cakes/choco-fruit 1-1.jpg">
+            </div>
+            <div class="detail-wrapper">
+              <div class="col itemTitle">
+                水果巧克力蛋糕
+              </div>
+              <div class="col itemSize">
+                6吋-圓形蛋糕
+              </div>
+              <div class="col itemPrice">
+                <span>$</span>
+                <span>600</span>
+              </div>
+              <div class="col itemQty">
+                1
+              </div>
+              <div class="col subtotal">
+                <span>$</span>
+                <span>600</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="divider"></div>
+
+          <div class="totalPrice">
+            <span>總金額:</span>
+            <span>900</span>
+          </div>
+        </div>
+      </div>
+
+      <!--------分業選單-------- -->
+      <!-- <div class="pagination">
+          <button class="paginationBtn prev-page" type="button">
+            <i class="fas fa-caret-left"></i>
+          </button>
+          <button class="pageNum" style="background-color: pink; color: white">
+            1
+          </button>
+          <button class="pageNum">2</button>
+          <button class="pageNum">3</button>
+          <button class="pageNum">4</button>
+          <button class="pageNum">5</button>
+          <button class="paginationBtn next-page" type="button">
+            <i class="fas fa-caret-right"></i>
+          </button>
+        </div> -->
+      </div>
+    </section>
+
+    <!-- Footer Section -->
+    <%- include('partials/footer') %>
+
+      <!-- Javascript -->
+      <%- include('javascript/script') %>
+</body>
+
+</html>

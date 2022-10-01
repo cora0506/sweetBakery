@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <%- include('partials/head') %>
+</head>
+
+<body>
+  <%- include('partials/header') %>
+
+    <section class="checkout">
+      <div class="heading">
+        <h1 class="page-heading">購物結帳</h1>
+      </div>
+
+      <div class="checkoutContainer">
+        <div class="orderCard">
+          <div class="orderHeader">
+            <div class="col" id="productPhoto">商品圖片</div>
+            <div class="col" id="productTitle">商品名稱</div>
+            <div class="col" id="sizeName">規格</div>
+            <div class="col" id="productPrice">單價</div>
+            <div class="col" id="productNum">數量</div>
+            <div class="col">小計</div>
+          </div>
+          <div class="divider"></div>
+          <!-- -----會員訂單資訊-------- -->
+          <div class="myOrders">
+            <% productInformation.forEach(proInform=> { %>
+              <div class="orderItems">
+                <div class="orderThumbnail">
+                  <% productPic .forEach(images=> { %> <% if(proInform.productId==images.productId){ %>
+                      <% if ((images.productImgId % 3)==1) { %>
+                        <img src="<%= images.imgPath %>" />
+                        <% } %>
+                          <% } %>
+                            <% }) %>
+                </div>
+                <div class="detail-wrapper">
+                  <div class="col itemTitle">
+                    <span>
+                      <%= proInform.productTitle %>
+                    </span>
+                  </div>
+                  <div class="col itemSize">
+                    <span>
+                      <%= proInform.sizeName %>
+                    </span>
+                  </div>
+                  <div class="col itemPrice">
+                    <span>
+                      <%= proInform.productPrice %>
+                    </span>
+                  </div>
+                  <div class="col itemQty">
+                    <span>
+                      <%= proInform.productNum %>
+                    </span>
+                  </div>
+                  <div class="col subtotal">
+                    <span>
+                      <%= proInform.subTotal %>
+                    </span>
+                  </div>
+                </div>
+              </div>
+              <% }) %>
+
+          </div>
+          <div class="totalPrice">
+            <span>總金額: $</span>
+            <span class="totPrice">0</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- ------訂購人資訊------ -->
+      <div class="customerInfo">
+        <h4>訂購人資訊</h4>
+        <form class="row" action="/orders">
+          <div class="column">
+            <div class="guestData">
+              <label class="aaa" for="guestName">姓名</label>
+              <input class="formInput" type="text" id="guestName" name="guestName" placeholder="請輸入姓名"
+                onkeydown="if(event.keyCode==13)event.keyCode=9" required />
+            </div>
+            <div class="guestData">
+              <label for="guestEmail">電子信箱</label>
+              <input class="formInput" type="email" id="guestEmail" name="guestEmail" placeholder="請輸入電子信箱" required />
+            </div>
+            <div class="guestData">
+              <label for="guestPhone">電話</label>
+              <input class="formInput" type="tel" id="guestPhone" name="guestPhone" placeholder="請輸入電話" minlength="10"
+                maxlength="10" required />
+            </div>
+          </div>
+
+          <div class="column">
+            <div class="guestData">
+              <label for="guestName">取貨日期</label>
+              <div class="pickupDate">
+                <input type="text" id="datepicker" value="mm/dd/yyyy" required /><i class="fas fa-calendar-day"></i>
+              </div>
+            </div>
+            <div class="guestData">
+              <span>付款方式</span>
+              <span class="storePay">到店付款</span>
+            </div>
+            <div class="buttons">
+              <button type="submit" value="確認" class="submitBtn">確認送出</button>
+              <button class="cancelBtn">
+                <a href="/cart">取消</a>
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </section>
+
+    <!-- Footer Section -->
+    <%- include('partials/footer') %>
+
+      <!-- Javascript -->
+      <%- include('javascript/script') %>
+        <script>
+          $.datepicker.regional["zh-TW"] = {
+            dayNames: [
+              "星期日",
+              "星期一",
+              "星期二",
+              "星期三",
+              "星期四",
+              "星期五",
+              "星期六",
+            ],
+            dayNamesMin: ["日", "一", "二", "三", "四", "五", "六"],
+            monthNames: [
+              "一月",
+              "二月",
+              "三月",
+              "四月",
+              "五月",
+              "六月",
+              "七月",
+              "八月",
+              "九月",
+              "十月",
+              "十一月",
+              "十二月",
+            ],
+            monthNamesShort: [
+              "一月",
+              "二月",
+              "三月",
+              "四月",
+              "五月",
+              "六月",
+              "七月",
+              "八月",
+              "九月",
+              "十月",
+              "十一月",
+              "十二月",
+            ],
+          };
+          //將預設語系設定為中文
+          $.datepicker.setDefaults($.datepicker.regional["zh-TW"]);
+
+          $("#datepicker").datepicker({
+            minDate: +2,
+            maxDate: "+1W",
+          });
+
+          $(".fa-calendar-day").on("click", () => {
+            $("#datepicker").focus();
+          });
+
+          var data = sessionStorage.getItem("data");
+          $(".divider").text();
+
+          //-----------------暉暉在改-----------
+          // console.log(typeof data);
+
+          // 取得cart.js勾選的商品
+          console.log(sessionStorage.getItem("pid"));
+          var checkoutProduct = parseInt(
+            JSON.parse(sessionStorage.getItem("pid")).id
+          );
+          var a = eval("sessionStorage.getItem('pid')");
+          console.log(a)
+          //-----------------------------------------
+
+
+          $(".submitBtn").on("click", function () {
+            if ($(".formInput").val() == "") {
+              $(".submitBtn").prop("disable");
+              Swal.fire({
+                icon: "warning",
+                title: "資料有缺哦~!",
+              });
+            }
+            else {
+              window.location = "/orders";
+            }
+          });
+
+          $(function getSum() {
+            let money = 0; //計算總價錢
+            $(".subtotal").each(function (index) {
+              money += parseInt($(".subtotal").eq(index).text().substr(0));
+            })
+            $(".totPrice").text(money);
+          })();
+        </script>
+</body>
+
+</html>
